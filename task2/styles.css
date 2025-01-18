@@ -1,0 +1,96 @@
+body
+{
+    background: url('/sources/gifs/camelot_background.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+header
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fire-text
+{
+    color: #ffeb3b;
+    font-weight: 600;
+    font-size: clamp(20px, 4vw, 50px);
+    text-shadow: 0 0 10px #ff8c3b,
+        0 0 40px #ff8c3b,
+        0 0 80px #ff8c3b;
+    cursor: pointer;
+    user-select: none;
+}
+
+.fire-text-container
+{
+    text-align: center;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    height: 5vh;
+    filter: url(#fire);
+}
+
+svg
+{
+    width: 0;
+    height: 0;
+}
+
+input
+{
+    display: none;
+}
+
+.drop-down-page
+{
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(circle, #f2e3c6, #d4bfa5);
+    border: 1px solid #704214;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    min-height: 0;
+    opacity: 0;
+    width: 60%;
+    pointer-events: none;
+}
+
+.page-navigation
+{
+    display: flex;
+}
+
+.tab-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh;
+    background: #a63c00;
+    border-right: 0.125vw solid #752d03;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.25s;
+    z-index: 2;
+    padding: 0 0.5vw;
+    font-size: clamp(8px, 1.5vw, 25px);
+}
+
+.tab-title:hover
+{
+    transform: translateY(-5%);
+}
+
+.tab-content
+{
+    display: none;
+    background: #fff;
+    color: #2c3e50;
+    flex: 1;
+    margin: 1vh 1vw;
+}

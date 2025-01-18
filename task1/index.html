@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шапка с меню</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <input type="checkbox" id="welcome-toggle">
+
+        <div class="fire-text-container">
+            <label for="welcome-toggle" class="fire-text">Welcome to Camelot</label>
+            <svg>
+                <filter id="fire">
+                    <feTurbulence id="turbulence" baseFrequency="0.1 0.1" numOctaves="2" seed="3">
+                        <animate attributeName="baseFrequency" dur="10s" values="0.1 0.1; 0.12 0.12; 0.1 0.1"
+                            repeatCount="indefinite"></animate>
+                    </feTurbulence>
+                    <feDisplacementMap in="SourceGraphic" scale="5"></feDisplacementMap>
+                </filter>
+            </svg>
+        </div>
+
+        <div class="drop-down-page">
+            <input type="radio" name="nav-tabs" id="tab-1" checked>
+            <input type="radio" name="nav-tabs" id="tab-2">
+            <input type="radio" name="nav-tabs" id="tab-3">
+            <input type="radio" name="nav-tabs" id="tab-4">
+            <div class="page-navigation">
+                <label for="tab-1" class="tab-title">Foundation History</label>
+                <label for="tab-2" class="tab-title">Magical Beasts</label>
+                <label for="tab-3" class="tab-title">The goods store</label>
+                <label for="tab-4" class="tab-title">Audience with the King</label>
+            </div>
+            <div class="tab-content" id="tab-1-content">
+                Content here!-1
+            </div>
+            <div class="tab-content" id="tab-2-content">
+                Content here!-2
+            </div>
+            <div class="tab-content" id="tab-3-content">
+                Content here!-3
+            </div>
+            <div class="tab-content" id="tab-4-content">
+                Content here!-4
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>
