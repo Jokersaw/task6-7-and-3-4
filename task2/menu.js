@@ -1,66 +1,57 @@
 document.addEventListener('DOMContentLoaded', function () {
     const welcomeToggle = document.getElementById('welcome-toggle');
     const dropDownPage = document.querySelector('.drop-down-page');
-    const tabTitles = document.querySelectorAll('.tab-title');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const radioTabs = document.querySelectorAll('input[name="nav-tabs"]');
+    const pageNavigation = document.querySelector('.page-navigation');
+    const startTabId = 'tab-1';
+    const state = {
+        activeTab: {
+            tabId: null,
+            titleElement: null,
+            contentElement: null,
+        },
+    };
 
     function toggleDropDown() {
-        if (welcomeToggle.checked) {
-            dropDownPage.style.minHeight = '50vh';
-            dropDownPage.style.opacity = '1';
-            dropDownPage.style.pointerEvents = 'auto';
-            dropDownPage.style.transition = 'opacity 0.3s ease-in, height 0.3s ease-in';
-        } else {
-            dropDownPage.style.minHeight = '0';
-            dropDownPage.style.opacity = '0';
-            dropDownPage.style.pointerEvents = 'none';
-            dropDownPage.style.transition = 'opacity 0.3s ease-out, min-height 0.3s ease-out';
-        }
+        dropDownPage.classList.toggle('open', welcomeToggle.checked);
     }
-
-    toggleDropDown()
 
     welcomeToggle.addEventListener('change', toggleDropDown);
+    toggleDropDown();
 
     function handleTabSwitch(selectedTabId) {
+        if (state.activeTab.tabId === selectedTabId) return;
 
-        radioTabs.forEach(tab => {
-            if (tab.id === selectedTabId) {
-                tab.checked = true;
-            }
-        });
-        tabContents.forEach(tabContent => {
-            tabContent.style.display = 'none';
-        });
-        const selectedContent = document.getElementById(selectedTabId + '-content');
-        if (selectedContent) {
-            selectedContent.style.display = 'block';
-        }
+        const { titleElement: prevTitle, contentElement: prevContent } = state.activeTab;
+        if (prevTitle) prevTitle.classList.remove('active');
+        if (prevContent) prevContent.classList.remove('active');
 
-        tabTitles.forEach(title => {
-            title.style.background = '#a63c00';
-            title.style.color = '#fff';
-            title.style.borderBottom = 'none';
-            title.style.borderRight = '0.125vw solid #752d03';
-        });
+        const newTitle = document.querySelector(`label[for="${selectedTabId}"]`);
+        const newContent = document.getElementById(`${selectedTabId}-content`);
 
-        const selectedLabel = document.querySelector(`label[for="${selectedTabId}"]`);
-        if (selectedLabel) {
-            selectedLabel.style.background = '#fff';
-            selectedLabel.style.color = '#2c3e50';
-            selectedLabel.style.borderBottom = '0';
-            selectedLabel.style.borderRight = '0.125vw solid #fff';
-        }
+        state.activeTab = {
+            tabId: selectedTabId,
+            titleElement: newTitle,
+            contentElement: newContent,
+        };
+
+        if (newTitle) newTitle.classList.add('active');
+        if (newContent) newContent.classList.add('active');
     }
 
-    tabTitles.forEach(title => {
-        title.addEventListener('click', function () {
-            const tabId = this.getAttribute('for');
+    handleTabSwitch(startTabId);
+
+    pageNavigation.addEventListener('click', function (event) {
+        const tabId = event.target.getAttribute('for');
+        if (tabId) {
             handleTabSwitch(tabId);
-        });
+        }
     });
 
-    handleTabSwitch('tab-1');
+    pageNavigation.addEventListener('mouseenter', function (event) {
+        event.target.classList.add('hover');
+    }, true);
 
+    pageNavigation.addEventListener('mouseleave', function (event) {
+        event.target.classList.remove('hover');
+    }, true);
 });
